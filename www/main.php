@@ -89,7 +89,7 @@ else if ($technique == '3') {
   //Technique 3: Hashing User Input
 
   $user = mysqli_real_escape_string($connection_mysql, $user);
-  $query = "SELECT * FROM users WHERE username = '$user'";
+  $query = "SELECT password FROM users WHERE username = '$user' ";
 
   $val = mysqli_query($connection_mysql, $query);
   if (mysqli_num_rows($val) > 0) {
@@ -97,20 +97,21 @@ else if ($technique == '3') {
     $row = mysqli_fetch_assoc($val);
 
     $hashed_password = $row['password'];
-    echo(var_dump($hashed_password)); //right value
-    echo'<br>';
-    echo(var_dump($pass)); //right value
-    //using password_verify --> even w/ string values substituted returns false
-    //so I don't know if its storing properly or something else
-    $passwordCheck = password_verify($pass, $hashed_password);
-    echo(var_dump($passwordCheck));
+    // echo(var_dump($hashed_password)); //right value
+    // echo(var_dump($pass)); //right value
 
-    if(! $passwordCheck){
-      echo'<h2>User is not authenticated</h2>';
-    }else{
-      echo'Passwords match';
-      echo'<h2>User is authenticated</h2>';
+    $passwordCheck = password_verify($pass, $hashed_password);
+
+    if ($password_verify($pass, $hashed_password)) {
+      echo 'Passwords match';
+      echo '<h2>User is authenticated</h2>';
     }
+    else {
+      echo '<h2>User is not authenticated</h2>';
+    }
+  }
+  else {
+    echo 'Invalid user entry';
   }
 }
 else if ($technique == '4') {

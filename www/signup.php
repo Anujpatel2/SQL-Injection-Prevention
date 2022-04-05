@@ -5,7 +5,7 @@ $password = "";
 $db ="login";
 
 $user=$_POST['email'];
-$pass=$_POST['password'];
+$pass=$_POST['psw'];
 
 
 //Technique 1: Parameterized Queries
@@ -22,6 +22,8 @@ $sql = "INSERT INTO users (username, password) VALUES ('$user','$hash')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
+  echo "Generated hash: ".$hash;
+  echo "Plain text password: ".$pass;
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
