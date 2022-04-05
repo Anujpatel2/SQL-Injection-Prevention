@@ -15,10 +15,10 @@ $conn = new mysqli($servername, $username, $password,$db);
 // VALUES ('John', 'john@example.com')";
 // $hashuser = hash('sha256', $user);
 // $hashpassword = hash('sha256', $pass);
-$user=password_hash($user, PASSWORD_BCRYPT,array('cost' => 12));
-$pass=password_hash($pass, PASSWORD_BCRYPT,array('cost' => 12));
+#$user=password_hash($user, PASSWORD_BCRYPT,array('cost' => 12));
+$hash=password_hash($pass, PASSWORD_DEFAULT);
 
-$sql = sprintf("INSERT INTO users (username, password) VALUE ('%s','%s')", $user,$pass);
+$sql = "INSERT INTO users (username, password) VALUES ('$user','$hash')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
