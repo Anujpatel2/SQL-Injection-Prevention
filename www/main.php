@@ -100,9 +100,9 @@ else if ($technique == '3') {
     // echo(var_dump($hashed_password)); //right value
     // echo(var_dump($pass)); //right value
 
-    $passwordCheck = password_verify($pass, $hashed_password);
+    // $passwordCheck = password_verify($pass, $hashed_password);
 
-    if ($password_verify($pass, $hashed_password)) {
+    if (password_verify($pass, $hashed_password)) {
       echo 'Passwords match';
       echo '<h2>User is authenticated</h2>';
     }
